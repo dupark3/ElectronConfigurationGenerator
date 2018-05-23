@@ -25,6 +25,9 @@ int main(){
     for (int atomic_number = 1; atomic_number != 119; ++atomic_number){
         int temp = atomic_number;
 
+        cout << atomic_number << ' ' << periodic_table_info[atomic_number][0]
+                              << ' ' << periodic_table_info[atomic_number][1] << ' '; 
+
         // sublevel 1s
         if (temp >= 2){
             cout << "1s2";
