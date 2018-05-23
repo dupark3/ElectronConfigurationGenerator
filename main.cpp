@@ -1,3 +1,4 @@
+#include <algorithm> // sort
 #include <iostream>
 #include <fstream>
 #include <map>
@@ -6,7 +7,15 @@
 
 using namespace std;
 
+void print_electron_config();
+void print_valid_position();
+
 int main(){
+    print_valid_position();
+}
+
+// prints all electron config from atomic number 1 to 118
+void print_electron_config(){
     ifstream periodic_table;
     periodic_table.open("periodictable.txt");
 
@@ -201,6 +210,64 @@ int main(){
 
         cout << endl;
     }
- 
-    return 0;
+}
+
+// utility program to add both, right, down, neither valid list
+void print_valid_position(){
+    vector<int> both = {3, 5, 6, 7, 8, 9, 11, 13, 14, 15, 16, 17};
+    for (int i = 19; i != 36; ++i){
+        both.push_back(i);
+    }
+    for (int i = 37; i != 54; ++i){
+        both.push_back(i);
+    }
+    both.push_back(55);
+    both.push_back(56);
+    for (int i = 71; i != 86; ++i){
+        both.push_back(i);
+    }
+    
+    for (int i = 58; i != 71; ++i){
+        both.push_back(i);
+    }
+
+    cout << "BOTH VALID: " << endl;
+    cout << "{ {" << both[0] << ", 1}";
+    for (int i = 1; i != both.size(); ++i){
+        cout << ", {" << both[i] << ", 1}";
+    }
+    cout << " }" << endl;
+
+
+    vector<int> right = {87, 88};
+    for (int i = 103; i != 118; ++i){
+        right.push_back(i);
+    }
+    for (int i = 89; i != 102; ++i){
+        right.push_back(i);
+    }
+    cout << "RIGHT VALID: " << endl;
+    cout << "{ {" << right[0] << ", 1}";
+    for (int i = 1; i != right.size(); ++i){
+        cout << ", {" << right[i] << ", 1}";
+    }
+    cout << " }" << endl;
+
+    vector<int> down = {1, 2, 4, 10, 12, 18, 36, 54, 86, 71};
+    cout << "DOWN VALID: " << endl;
+    cout << "{ {" << down[0] << ", 1}";
+    for (int i = 1; i != down.size(); ++i){
+        cout << ", {" << down[i] << ", 1}";
+    }
+    cout << " }" << endl;    
+
+    vector<int> neither = {118, 103};
+    cout << "NEITHER VALID: " << endl;
+    cout << "{ {" << neither[0] << ", 1}";
+    for (int i = 1; i != neither.size(); ++i){
+        cout << ", {" << neither[i] << ", 1}";
+    }
+    cout << " }" << endl;       
+
+    cout << "CHECK TOTAL SIZE: " << both.size() + right.size() + down.size() + neither.size() << endl;
 }
