@@ -1,8 +1,27 @@
 #include <iostream>
+#include <fstream>
+#include <map>
+#include <string>
+#include <vector>
 
 using namespace std;
 
 int main(){
+    ifstream periodic_table;
+    periodic_table.open("periodictable.txt");
+
+    map< int, vector<string> > periodic_table_info;
+    int atomic_number;
+    string element_symbol;
+    string element_name;
+
+    while(periodic_table >> atomic_number){
+        periodic_table >> element_symbol;
+        periodic_table >> element_name;
+        periodic_table_info[atomic_number].push_back(element_symbol);
+        periodic_table_info[atomic_number].push_back(element_name);
+    }
+
     for (int atomic_number = 1; atomic_number != 119; ++atomic_number){
         int temp = atomic_number;
 
